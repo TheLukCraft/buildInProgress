@@ -1,12 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [ CommonModule, FormsModule],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.sass'
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'buildInProgress';
+  password: string = '';
+  errorMessage: string | null = null;
+
+  checkPassword(): void {
+    if (this.password === 'ArtAuto123@') {
+      window.location.href = 'https://artauto.pl'; // Przekierowanie na stronę docelową
+    } else {
+      this.errorMessage = 'Niepoprawne hasło. Spróbuj ponownie.';
+      setTimeout(() => {
+        this.errorMessage = null; // Ukrycie komunikatu po 3 sekundach
+      }, 3000);
+    }
+  }
 }
